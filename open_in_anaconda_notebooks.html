@@ -19,6 +19,13 @@
         <button onclick="copyBadgeHTML()">Copy to Clipboard</button>
     </p>
     <p>
+        Badge Markdown
+        <br>
+        <textarea id="badgeMarkdown" rows="5" cols="80"></textarea>
+        <br>
+        <button onclick="copyBadgeMarkdown()">Copy to Clipboard</button>
+    </p>
+    <p>
         Test Badge
         <br>
         <div id="testBadge"></div>
@@ -34,7 +41,9 @@ function createBadge (form) {
     var inputURL = form.inputURL.value;
     var linkURL = `${baseURL}/api/nbserve/launch_notebook?nb_url=${encodeURIComponent(inputURL)}`;
     var badgeHTML = `<a target="_blank" href="${linkURL}"><img src="${imageURL}"></a>`
+    var badgeMarkdown = `[![open_in_anaconda](${imageURL})](${linkURL})`
     document.getElementById("badgeHTML").innerText = badgeHTML;
+    document.getElementById("badgeMarkdown").innerText = badgeMarkdown;
     document.getElementById("testBadge").innerHTML = badgeHTML;
     document.getElementById("output").style.display = "block";
     document.getElementById("button").value = "Update";
@@ -42,6 +51,13 @@ function createBadge (form) {
 
 function copyBadgeHTML () {
     const element = document.getElementById("badgeHTML");
+    element.select();
+    element.setSelectionRange(0, 99999);
+    document.execCommand('copy');
+}
+
+function copyBadgeMarkdown () {
+    const element = document.getElementById("badgeMarkdown");
     element.select();
     element.setSelectionRange(0, 99999);
     document.execCommand('copy');
