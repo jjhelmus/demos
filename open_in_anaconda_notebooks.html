@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<body>
+<p>
+    Enter the URL of a Juptyter notebook to create an "Open in Anaconda Notebooks" badge that can be copy and pasted into websites, blog posts, documentation, or social media posts.
+</p>
+<form name="linkCreateForm" action="" method="GET">
+    <p>
+        Notebook URL <input type="text" name="inputURL" value="https://example.com/notebook.ipynb" size="80">
+        <br>
+        <input type="button" name="button" value="Create" id="button" onclick="createBadge(this.form)">
+    </p>
+</form>
+<div id="output" style="display:none">
+    <p>
+        Badge HTML
+        <br>
+        <textarea id="badgeHTML" rows="5" cols="80"></textarea>
+        <br>
+        <button onclick="copyBadgeHTML()">Copy to Clipboard</button>
+    </p>
+    <p>
+        Test Badge
+        <br>
+        <div id="testBadge"></div>
+    </p>
+</div>
+</body>
+
+<script language="Javascript">
+
+function createBadge (form) {
+    var baseURL = "https://anaconda.cloud"
+    var imageURL = "https://static.anaconda.cloud/content/a22d04e8445b700f28937ab3231b8cded505d0395c63b7a269696722196d5415"
+    var inputURL = form.inputURL.value;
+    var linkURL = `${baseURL}/api/nbserve/launch_notebook?nb_url=${encodeURIComponent(inputURL)}`;
+    var badgeHTML = `<a target="_blank" href="${linkURL}"><img src="${imageURL}"></a>`
+    document.getElementById("badgeHTML").innerText = badgeHTML;
+    document.getElementById("testBadge").innerHTML = badgeHTML;
+    document.getElementById("output").style.display = "block";
+    document.getElementById("button").value = "Update";
+}
+
+function copyBadgeHTML () {
+    const element = document.getElementById("badgeHTML");
+    element.select();
+    element.setSelectionRange(0, 99999);
+    document.execCommand('copy');
+}
+
+</script>
