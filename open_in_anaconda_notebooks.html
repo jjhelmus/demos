@@ -3,6 +3,13 @@
 <p>
     Enter the URL of a Juptyter notebook to create an "Open in Anaconda Notebooks" badge that can be copy and pasted into websites, blog posts, documentation, or social media posts.
 </p>
+<p>
+    The Notebook URL can be from any service that has CORS headers that allow the notebook to be used by nb.anaconda.cloud.
+    GitHub and Anaconda.org both have these headers.
+    The URL must be to the notebook itself, not an online view of the notebook.
+    For GitHub use the “Raw” button to get a URL starting with “raw.githubusercontent.com”.
+    For Anaconda.org use the “Download” link to get a URL starting with “notebooks.anaconda.org”.
+</p>
 <form name="linkCreateForm" action="" method="GET">
     <p>
         Notebook URL <input type="text" name="inputURL" value="https://example.com/notebook.ipynb" size="80">
